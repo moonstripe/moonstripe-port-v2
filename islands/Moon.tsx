@@ -28,7 +28,7 @@ export default () => {
 
 
             // moon
-            const moonGeo = new THREE.SphereGeometry(20, 64, 64);
+            const moonGeo = new THREE.SphereGeometry(20, 32, 32);
             const moonMap = new THREE.TextureLoader().load('/moonmap4k.jpeg');
             const moonBump = new THREE.TextureLoader().load('/moonbump4k.jpeg');
 
