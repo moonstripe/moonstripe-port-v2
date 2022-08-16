@@ -4,6 +4,8 @@ import { tw } from "@twind";
 import { Handlers, PageProps } from "fresh/server.ts"
 import Layout from "../components/Layout.tsx";
 import Moon from "../islands/Moon.tsx";
+import ProductPages from "../islands/ProductPages.tsx";
+import DataVisualization from "../islands/DataVisualization.tsx";
 
 
 export const handlers: Handlers = {
@@ -28,24 +30,13 @@ export default function Home({ url }: PageProps) {
             {/* <button class={tw`rounded border-2 px-2 py-0 mr-auto`}>blast off</button> */}
           </div>
         </div>
-        <div class={tw`h-[35vh] lg:h-[25vh]`} />
-        <div id="features" class={tw`flex flex-col w-full bg-black`}>
-          <div id="product-pages" class={tw`mx-10`}>
-            <h1 class={tw`text-2xl lg:text-4xl font-bold mt-4`}>product pages</h1>
-            <i class={tw`font-light mb-4`}>find the right way to express how cool your product is.</i>
-            <div class={tw`mb-4`}>
-              <iframe src="https://kojinglick.com/products/cube" title="Cube Product Demo" class={tw`w-full h-[75vh] lg:h-[50vh] my-2`}></iframe>
-            </div>
-          </div>
-          <div id="data-visualization" class={tw`mx-10`}>
-            <h1 class={tw`text-2xl lg:text-4xl font-bold mt-4`}>data visualization</h1>
-            <i class={tw`font-light mb-4`}>get to the point quicker.</i>
-            <div class={tw`mb-4`}>
-              <iframe src="https://opencryptomap.deno.dev/15349693" title="Cube Product Demo" class={tw`w-full h-[50vh] lg:h-[75vh] my-2`}></iframe>
-            </div>
-          </div>
+        <div class={tw`h-[35vh] lg:h-[40vh]`} />
+        <div id="features" class={tw`flex flex-col w-full`}>
+          <ProductPages />
+          <div class={tw`h-[35vh] lg:h-[25vh]`} />
+          <DataVisualization />
         </div>
-        <div class={tw`h-[25vh]`} />
+        <div class={tw`h-[35vh] lg:h-[25vh]`} />
       </main>
     </Layout>
   );
