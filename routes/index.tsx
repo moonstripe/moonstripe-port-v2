@@ -9,14 +9,12 @@ import DataVisualization from "../islands/DataVisualization.tsx";
 
 
 export const handlers: Handlers = {
-  GET(req, ctx) {
-    console.log("request", req)
-    return ctx.render({ url: req })
+  async GET(req, ctx) {
+    return await ctx.render({ url: req })
   }
 }
 
 export default function Home({ url }: PageProps) {
-
   return (
     <Layout pathname={url.pathname}>
       <Moon />
