@@ -1,0 +1,18 @@
+html {
+    background-color: black;
+    font-family: 'Rubik';
+    scrollbar-color: dark;
+}
+
+body {
+    margin: 0;
+    scrollbar-color: dark;
+}
+
+main {
+    scrollbar-color: dark;
+}
+
+div {
+    scrollbar-color: dark;
+}
