@@ -10,21 +10,20 @@ import manifest from "./fresh.gen.ts";
 import { config, setup } from "@twind";
 import { virtualSheet } from "twind/sheets";
 
-console.time('until first render')
-
 const sheet = virtualSheet();
 sheet.reset();
 setup({ ...config, sheet });
 
 function render(ctx: RenderContext, render: InnerRenderFunction) {
+  console.time('render function main.ts')
   console.clear()
   const snapshot = ctx.state.get("twind") as unknown[] | null;
   sheet.reset(snapshot || undefined);
-  console.timeEnd('until first render')
   render();
   ctx.styles.splice(0, ctx.styles.length, ...(sheet).target);
   const newSnapshot = sheet.reset();
   ctx.state.set("twind", newSnapshot);
+  console.timeEnd('render function main.ts')
 }
 
 await start(manifest, { render });
