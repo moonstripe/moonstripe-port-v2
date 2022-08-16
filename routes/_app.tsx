@@ -49,7 +49,9 @@ export default function App(props: AppProps) {
 
         {/* Canonical */}
 
-        <link rel="canonical" href="https://www.moonstripe.com/" />
+        {/* <link rel="canonical" href="https://www.moonstripe.com/" />
+
+        <link rel="canonical" href="https://www.moonstripe.com/" /> */}
 
 
         <link rel="stylesheet" href="./styles.css" />
