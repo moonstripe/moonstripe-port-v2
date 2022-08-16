@@ -46,7 +46,9 @@ export default function App(props: AppProps) {
 
         {/* Canonical */}
 
-        <link rel="canonical" href="https://www.kojinglick.com/" />
+        <link rel="canonical" href="https://www.moonstripe.com/" />
+
+
         <link rel="stylesheet" href="./styles.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
