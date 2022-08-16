@@ -40,6 +40,8 @@ export default function App(props: AppProps) {
 
         <meta name="twitter:description" content="web development, out of this world." />
 
+        <meta name="twitter:image" content="/kojin-logo.png"/>
+
         <meta name="twitter:site" content="@moonstripe_____" />
 
         <meta name="twitter:creator" content="@moonstripe_____" />
