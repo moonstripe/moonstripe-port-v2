@@ -6,9 +6,18 @@ export const config: Configuration = {
   mode: "silent",
   theme: {
     fontFamily: {
-      sans: ['Rubik', 'sans-serif']
-    }
-    
-  }
+      sans: ['Rubik', 'sans-serif'],
+      cube: 'Inter'
+    },
+    extend: {
+      colors: {
+        'neutral': "#9DB4C0",
+        'bg-dark': "#253237",
+        'bg-light': "#E0FBFC",
+        'bump-start': "#2596be",
+        'bump-end': "#d22cae",
+      },
+    },
+  },
 };
 if (IS_BROWSER) setup(config);
