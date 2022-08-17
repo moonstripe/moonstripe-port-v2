@@ -12,7 +12,6 @@ interface NodesEdgesMeta {
     count: number
 }
 
-
 interface SocketClientProps {
     blockNumber: string;
     pathname: string;
