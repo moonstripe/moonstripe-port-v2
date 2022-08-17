@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from "preact"
-import { useRef, useLayoutEffect, useState, MutableRef, Ref } from "preact/hooks"
+import { useRef, useLayoutEffect } from "preact/hooks"
 import { IS_BROWSER } from "fresh/runtime.ts"
 import { tw } from "twind"
 import { OrbitControls } from "orbit"
@@ -8,7 +8,6 @@ import * as THREE from "three"
 
 export default () => {
     const ref = useRef()
-    const [environment, setEnvironment] = useState<Record<string, any> | undefined>();
 
 
     if (IS_BROWSER) {
@@ -24,7 +23,7 @@ export default () => {
             renderer.setClearColor(0x111122, 1);
             renderer.setSize(window.innerWidth, window.innerHeight);
 
-            ref!.current!.appendChild(renderer.domElement);
+            ref.current.appendChild(renderer.domElement);
 
 
             // moon
@@ -33,11 +32,13 @@ export default () => {
             const moonBump = new THREE.TextureLoader().load('/moonbump4k.jpeg');
 
 
-            const moonMat = new THREE.MeshPhongMaterial({ map: moonMap, bumpMap: moonBump, bumpScale: 0.5, shininess: 1 });
+            const moonMat = new THREE.MeshPhongMaterial({ map: moonMap, bumpMap: moonBump, bumpScale: 0.1, shininess: 1 });
             const moonMesh = new THREE.Mesh(moonGeo, moonMat);
 
             moonMesh.position.z = 30
             moonMesh.position.y = -11
+
+            moonMesh.rotation.z = 250
 
 
 
