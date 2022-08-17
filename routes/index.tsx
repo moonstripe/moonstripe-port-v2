@@ -30,15 +30,12 @@ export default function Home({ url }: PageProps) {
           </div>
         </div>
         <div id="features" class={tw`flex flex-col w-full absolute top-[100vh]`}>
-          {
-            IS_BROWSER ? (
-              <Fragment>
-                <ProductPages />
-                <div class={tw`h-[35vh] lg:h-[25vh]`} />
-                <DataVisualization />
-              </Fragment>
-            ) : null
-          }
+
+          <Fragment>
+            <ProductPages />
+            <div class={tw`h-[35vh] lg:h-[25vh]`} />
+            <DataVisualization />
+          </Fragment>
         </div>
         <div class={tw`h-[35vh] lg:h-[25vh]`} />
       </main>
