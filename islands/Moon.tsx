@@ -1,13 +1,13 @@
 /** @jsx h */
 import { h } from "preact"
-import { useRef, useLayoutEffect, useState } from "preact/hooks"
+import { useRef, useLayoutEffect, useState, MutableRef } from "preact/hooks"
 import { IS_BROWSER } from "fresh/runtime.ts"
 import { tw } from "twind"
 import { OrbitControls } from "orbit"
 import * as THREE from "three"
 
 export default () => {
-    const ref = useRef<HTMLDivElement>()
+    const ref = useRef<MutableRef<HTMLDivElement | undefined>>()
     const [environment, setEnvironment] = useState<Record<string, any> | undefined>();
 
 
@@ -24,7 +24,7 @@ export default () => {
             renderer.setClearColor(0x111122, 1);
             renderer.setSize(window.innerWidth, window.innerHeight);
 
-            ref.current.appendChild(renderer.domElement);
+            ref?.current?.appendChild(renderer.domElement);
 
 
             // moon
@@ -70,9 +70,9 @@ export default () => {
             for (var z = -1000; z < 1000; z += 20) {
 
                 // Make a sphere (exactly the same as before). 
-                var geometry = new THREE.SphereGeometry(0.5, 32, 32)
-                var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
-                var sphere = new THREE.Mesh(geometry, material)
+                const geometry = new THREE.SphereGeometry(0.5, 32, 32)
+                const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+                const sphere = new THREE.Mesh(geometry, material)
 
                 // This time we give the sphere random x and y positions between -500 and 500
                 sphere.position.x = Math.random() * 1000 - 500;
@@ -99,7 +99,7 @@ export default () => {
 
             // lighting
 
-            const spotLight = new THREE.DirectionalLight({ color: 0x404040, intensity: 0, decay: 0.5 });
+            const spotLight = new THREE.DirectionalLight( 0xfdfbdd );
 
             spotLight.position.x = 100
             spotLight.position.y = 100
@@ -125,12 +125,11 @@ export default () => {
 
             controls.target.set(0, 10, 40)
 
-            const animate = (time) => {
+            const animate = () => {
 
 
 
                 requestAnimationFrame(animate);
-                // console.log(time)
                 controls.update()
                 earthMesh.rotation.y += 0.0002
                 moonMesh.rotation.z -= 0.00003

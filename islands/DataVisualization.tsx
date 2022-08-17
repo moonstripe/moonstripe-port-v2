@@ -10,11 +10,13 @@ export default () => {
 
     if (IS_BROWSER) {
         useLayoutEffect(() => {
-            document.querySelector('iframe#data-visualization').addEventListener('load', () => {
+            document.querySelector('iframe#data-visualization')?.addEventListener('load', () => {
                 setLoaded(true)
             })
         
-            return () => document.querySelector('iframe#data-visualization').removeEventListener('load')
+            return () => document.querySelector('iframe#data-visualization')?.removeEventListener('load', () => {
+                setLoaded(true)
+            })
         }, [])
     }
 
