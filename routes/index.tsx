@@ -1,5 +1,5 @@
 /** @jsx h */
-import { h } from "preact";
+import { h, Fragment } from "preact";
 import { tw } from "@twind";
 import { IS_BROWSER } from "fresh/runtime.ts"
 import { Handlers, PageProps } from "fresh/server.ts"
@@ -30,9 +30,15 @@ export default function Home({ url }: PageProps) {
           </div>
         </div>
         <div id="features" class={tw`flex flex-col w-full absolute top-[100vh]`}>
-          <ProductPages />
-          <div class={tw`h-[35vh] lg:h-[25vh]`} />
-          <DataVisualization />
+          {
+            IS_BROWSER ? (
+              <Fragment>
+                <ProductPages />
+                <div class={tw`h-[35vh] lg:h-[25vh]`} />
+                <DataVisualization />
+              </Fragment>
+            ) : null
+          }
         </div>
         <div class={tw`h-[35vh] lg:h-[25vh]`} />
       </main>
