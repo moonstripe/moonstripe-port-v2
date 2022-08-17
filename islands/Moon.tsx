@@ -1,13 +1,13 @@
 /** @jsx h */
 import { h } from "preact"
-import { useRef, useLayoutEffect, useState, MutableRef } from "preact/hooks"
+import { useRef, useLayoutEffect, useState, MutableRef, Ref } from "preact/hooks"
 import { IS_BROWSER } from "fresh/runtime.ts"
 import { tw } from "twind"
 import { OrbitControls } from "orbit"
 import * as THREE from "three"
 
 export default () => {
-    const ref = useRef<MutableRef<HTMLDivElement | undefined>>()
+    const ref = useRef()
     const [environment, setEnvironment] = useState<Record<string, any> | undefined>();
 
 
@@ -24,7 +24,7 @@ export default () => {
             renderer.setClearColor(0x111122, 1);
             renderer.setSize(window.innerWidth, window.innerHeight);
 
-            ref?.current?.appendChild(renderer.domElement);
+            ref!.current!.appendChild(renderer.domElement);
 
 
             // moon
@@ -145,12 +145,7 @@ export default () => {
             animate();
 
 
-        }, [])
-
-        // modify scene with mouse position
-        useLayoutEffect(() => {
-
-        }, [])
+        }, [ref.current])
     }
 
 
