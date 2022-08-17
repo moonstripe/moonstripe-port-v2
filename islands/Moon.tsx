@@ -7,7 +7,7 @@ import { OrbitControls } from "orbit"
 import * as THREE from "three"
 
 export default () => {
-    const ref = useRef()
+    const ref = useRef(null)
 
 
     if (IS_BROWSER) {
@@ -146,7 +146,7 @@ export default () => {
             animate();
 
 
-        }, [ref.current])
+        }, [])
     }
 
 
