@@ -84,7 +84,7 @@ export default ({ blockNumber, pathname }: SocketClientProps) => {
 
             const hexCheck: string[] = [];
 
-            transactions.forEach((t: any, i: number) => {
+            transactions.forEach((t: Record<string, string>, i: number) => {
 
                 returnData.count++;
 
