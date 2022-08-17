@@ -1,30 +1,53 @@
 /** @jsx h */
 import { h } from "preact"
-import { useRef, useLayoutEffect } from "preact/hooks"
+import { useRef, useLayoutEffect, useState } from "preact/hooks"
 import { IS_BROWSER } from "fresh/runtime.ts"
 import { tw } from "twind"
 import { OrbitControls } from "orbit"
 import * as THREE from "three"
 
 export default () => {
+    const [camera, setCamera] = useState()
+    const [renderer, setRenderer] = useState()
+
+
     const ref = useRef(null)
 
+    const handleResize = () => {
+        if (camera && renderer) {
+            console.log('hit handler')
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        
+            renderer.setSize( window.innerWidth, window.innerHeight );
+        }
+    }
 
     if (IS_BROWSER) {
 
+        useLayoutEffect(() => {
+            globalThis.addEventListener('resize', handleResize, true)
+
+            return () => globalThis.removeEventListener('resize', handleResize)
+        }, [camera, renderer])
+
         // setup
         useLayoutEffect(() => {
+
+
+            const WIDTH = ref.current.offsetWidth;
+            const HEIGHT = ref.current.offsetHeight;
+
             const stars = []
 
             const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const camera = new THREE.PerspectiveCamera(50, WIDTH / HEIGHT, 0.1, 1000);
 
             const renderer = new THREE.WebGLRenderer();
             renderer.setClearColor(0x111122, 1);
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setSize(WIDTH, HEIGHT);
 
             ref.current.appendChild(renderer.domElement);
-
 
             // moon
             const moonGeo = new THREE.SphereGeometry(20, 32, 32);
@@ -92,7 +115,7 @@ export default () => {
                 stars.push(sphere);
 
             }
-            
+
 
             scene.add(pivot)
 
@@ -100,7 +123,7 @@ export default () => {
 
             // lighting
 
-            const spotLight = new THREE.DirectionalLight( 0xfdfbdd );
+            const spotLight = new THREE.DirectionalLight(0xfdfbdd);
 
             spotLight.position.x = 100
             spotLight.position.y = 100
@@ -125,6 +148,9 @@ export default () => {
             controls.enableRotate = false
 
             controls.target.set(0, 10, 40)
+            
+            setCamera(camera)
+            setRenderer(renderer)
 
             const animate = () => {
 
@@ -144,15 +170,13 @@ export default () => {
 
             }
             animate();
-
-
         }, [])
     }
 
 
     return (
         <div class={tw`z-[-1] fixed top-0 left-0`}>
-            <div ref={ref} />
+            <div ref={ref} style={{height: '100vh', width: '100vw'}}/>
         </div>
     )
 }

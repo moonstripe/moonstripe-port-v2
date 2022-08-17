@@ -7,7 +7,7 @@ export default () => {
     const [isHover, setHover] = useState<boolean>(false)
 
     return (
-        <div class={tw`flex flex-col`}>
+        <div class={tw`flex flex-col z-10`}>
             <div class={tw`text-white fixed bottom-10 left-10 text-2xl hover:bg-black`} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
                 <p class={tw`text-white text-lg text-thin`}>contact:</p>
                 <div class={tw`flex flex-row `}>
