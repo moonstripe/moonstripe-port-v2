@@ -88,7 +88,7 @@ export const handler: Handlers = {
                     }
                 },
                 pool: {
-                    size: 5,
+                    size: 2,
                     timeout: 30000
                 }
             })
