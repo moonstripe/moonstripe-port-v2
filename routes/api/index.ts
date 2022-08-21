@@ -4,11 +4,12 @@ import { config } from "dotenv"
 
 const client = new SMTPClient({
     debug: {
-        log: true
+        log: true,
+        noStartTLS: false
     },
     connection: {
         hostname: "smtp.gmail.com",
-        port: 465,
+        port: 587,
         tls: false,
         auth: {
             username: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPUSER : Deno.env.get('SMTPUSER'),
