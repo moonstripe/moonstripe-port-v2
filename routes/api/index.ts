@@ -8,8 +8,8 @@ const client = new SMTPClient({
     },
     connection: {
         hostname: "smtp.gmail.com",
-        port: 587,
-        tls: true,
+        port: 465,
+        tls: false,
         auth: {
             username: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPUSER : Deno.env.get('SMTPUSER'),
             password: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPPASS : Deno.env.get('SMTPPASS')
