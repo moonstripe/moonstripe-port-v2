@@ -106,7 +106,7 @@ export const handler: Handlers = {
                 html: emailBody,
             })
 
-            console.log('sent mail')
+            console.log('sent mail to', requestBody.email)
 
             await client.close()
         }
