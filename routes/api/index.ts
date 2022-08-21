@@ -23,7 +23,6 @@ const generateHtml = (choices: Array<string>) => {
         custom = custom.concat(websiteHTML)
     }
 
-
     if (choices.includes("chat")) {
         const websiteHTML = `<h4 style="margin-top: 1.25rem; margin-bottom: 0.75rem;">open source, hiking, and more</h4>
             <p style="margin-top: 0.75rem; margin-botton: 0.75rem;">never have been a big fan of labels, so i end up doing a lot of other things. let's chat about all of that stuff, too!</p>`
