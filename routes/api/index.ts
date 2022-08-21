@@ -86,8 +86,8 @@ export const handler: Handlers = {
                     port: 465,
                     tls: true,
                     auth: {
-                        username: config({ safe: true, export: true }).SMTPUSER,
-                        password: config({ safe: true, export: true }).SMTPPASS
+                        username: config({ safe: true, export: true }).ENV === "dev" ? config({ safe: true, export: true }).SMTPUSER : Deno.env.get('SMTPUSER'),
+                        password: config({ safe: true, export: true }).ENV === "dev" ? config({ safe: true, export: true }).SMTPPASS : Deno.env.get('SMTPPASS')
                     }
                 }
             })
