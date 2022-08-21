@@ -77,8 +77,6 @@ export const handler: Handlers = {
 
         const decoder = new TextDecoder()
 
-        console.log(Deno.env.get("ENV"))
-
         if (!result?.done) {
             const client = new SMTPClient({
                 connection: {
