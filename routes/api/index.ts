@@ -79,7 +79,7 @@ export const handler: Handlers = {
 
         const decoder = new TextDecoder()
 
-        console.log(config({ safe: true, export: true }).ENV === "dev" ? config({ safe: true, export: true }).SMTPUSER : Deno.env.get('SMTPUSER'))
+        console.log(Deno.env.get("ENV"))
 
         if (!result?.done) {
             const client = new SMTPClient({
