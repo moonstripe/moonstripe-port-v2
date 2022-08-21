@@ -86,8 +86,8 @@ export const handler: Handlers = {
                     port: 465,
                     tls: true,
                     auth: {
-                        username: config({ safe: true, export: true }).ENV === "dev" ? config({ safe: true, export: true }).SMTPUSER : Deno.env.get('SMTPUSER'),
-                        password: config({ safe: true, export: true }).ENV === "dev" ? config({ safe: true, export: true }).SMTPPASS : Deno.env.get('SMTPPASS')
+                        username: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPUSER : Deno.env.get('SMTPUSER'),
+                        password: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPPASS : Deno.env.get('SMTPPASS')
                     }
                 }
             })
@@ -103,7 +103,7 @@ export const handler: Handlers = {
 
             await client.send({
                 from: "Kojin - Moonstripe <info@moonstripe.com>",
-                to: config({ safe: true, export: true }).ENV === "dev" ? "kojinglick@gmail.com" : requestBody.email,
+                to: Deno.env.get("ENV") !== "prod" ? "kojinglick@gmail.com" : requestBody.email,
                 subject: "Moon's the limit",
                 html: emailBody,
             })
