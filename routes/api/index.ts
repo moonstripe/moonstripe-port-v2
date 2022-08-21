@@ -2,21 +2,7 @@ import { Handlers } from "fresh/server.ts"
 import { SMTPClient } from "denomailer"
 import { config } from "dotenv"
 
-const client = new SMTPClient({
-    debug: {
-        log: true,
-        noStartTLS: false
-    },
-    connection: {
-        hostname: "smtp.gmail.com",
-        port: 587,
-        tls: true,
-        auth: {
-            username: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPUSER : Deno.env.get('SMTPUSER'),
-            password: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPPASS : Deno.env.get('SMTPPASS')
-        }
-    }
-})
+console.log(config({ safe: true, export: true }).SMTPUSER, config({ safe: true, export: true }).SMTPPASS)
 
 const generateHtml = (choices: Array<string>) => {
     let custom = ``;
@@ -85,6 +71,22 @@ const generateHtml = (choices: Array<string>) => {
 
 export const handler: Handlers = {
     async POST(req: Request) {
+        const client = new SMTPClient({
+            debug: {
+                log: true,
+                noStartTLS: false
+            },
+            connection: {
+                hostname: "smtp.gmail.com",
+                port: 465,
+                tls: true,
+                auth: {
+                    username: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPUSER : Deno.env.get('SMTPUSER'),
+                    password: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPPASS : Deno.env.get('SMTPPASS')
+                }
+            }
+        })
+
 
         let result: ReadableStreamDefaultReadResult<Uint8Array> | undefined;
 
@@ -102,8 +104,7 @@ export const handler: Handlers = {
                 to: Deno.env.get("ENV") !== "prod" ? "kojinglick@gmail.com" : requestBody.email,
                 subject: "Moon's the limit",
                 html: emailBody,
-            }).then(console.log).catch(console.error)
-            console.log('sent mail to', requestBody.email)
+            }).then(() => console.log('sent mail to', requestBody.email)).catch(console.error)
             await client.close()
         }
 
