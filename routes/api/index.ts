@@ -2,8 +2,6 @@ import { Handlers } from "fresh/server.ts"
 import { SMTPClient } from "denomailer"
 import { config } from "dotenv"
 
-console.log(config({ safe: true, export: true }).SMTPUSER, config({ safe: true, export: true }).SMTPPASS)
-
 const generateHtml = (choices: Array<string>) => {
     let custom = ``;
 
