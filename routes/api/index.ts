@@ -99,7 +99,7 @@ export const handler: Handlers = {
                 to: Deno.env.get("ENV") !== "prod" ? "kojinglick@gmail.com" : requestBody.email,
                 subject: "Moon's the limit",
                 html: emailBody,
-            })
+            }).then(console.log).catch(console.error)
             console.log('sent mail to', requestBody.email)
             await client.close()
         }
