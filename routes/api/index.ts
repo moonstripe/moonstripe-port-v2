@@ -96,18 +96,13 @@ export const handler: Handlers = {
 
 
             const emailBody = generateHtml(requestBody.choices)
-
-            // TODO: switch email back to dynamic from static
-
             await client.send({
                 from: "Kojin - Moonstripe <info@moonstripe.com>",
                 to: Deno.env.get("ENV") !== "prod" ? "kojinglick@gmail.com" : requestBody.email,
                 subject: "Moon's the limit",
                 html: emailBody,
             })
-
             console.log('sent mail to', requestBody.email)
-
             await client.close()
         }
 
