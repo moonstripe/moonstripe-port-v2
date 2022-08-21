@@ -48,6 +48,8 @@ const generateHtml = (choices: Array<string>) => {
 export const handler: Handlers = {
     async POST(req: Request, ctx: HandlerContext) {
 
+        console.log(req.destination)
+
         let result: ReadableStreamReadResult<Uint8Array> | undefined;
 
         const reader: ReadableStreamDefaultReader<Uint8Array> | undefined = req?.body?.getReader();
