@@ -1,5 +1,6 @@
-import { HandlerContext, Handlers } from "fresh/server.ts"
+import { Handlers } from "fresh/server.ts"
 import { SMTPClient } from "denomailer"
+import { config } from "dotenv"
 
 const generateHtml = (choices: Array<string>) => {
     let custom = ``;
@@ -31,7 +32,29 @@ const generateHtml = (choices: Array<string>) => {
 
     return `
         <div style="background-color:#fff;">
-            <div style="width: 33vw; margin-left: auto; margin-right: auto;">
+            <style scoped>
+                @media (max-width: 400px) {
+                    div {
+                        width: 60vw;
+                    }
+                }
+                @media (max-width: 800px) {
+                    div {
+                        width: 50vw;
+                    }
+                }
+                @media (max-width: 1200px) {
+                    div {
+                        width: 40vw;
+                    }
+                }
+                @media (min-width: 1200px) {
+                    div {
+                        width: 30vw;
+                    }
+                }
+            </style>
+            <div style="margin-left: auto; margin-right: auto;">
                 <a href="https://moonstripe.com/" target="_blank" rel="noopener noreferrer"><img src="https://moonstripe.com/logo.png" alt="A moon covered by clouds" style="margin-top: 12px; margin-left: 12px; width: 75px; height: auto"/></a>
                 <p style="margin-top: 0.75rem; margin-botton: 0.75rem;">my name is Kojin, and i build digital experiences for moonstripe design.</p>
                 <p style="margin-top: 0.75rem; margin-botton: 0.75rem;">we take pride in the high-quality design coupled with the rugged practicality of our projects. from a logo touch-up to a new digital strategy, there's no project too small for the whole nine yards.</p>
@@ -46,11 +69,11 @@ const generateHtml = (choices: Array<string>) => {
 }
 
 export const handler: Handlers = {
-    async POST(req: Request, ctx: HandlerContext) {
+    async POST(req: Request) {
 
-        console.log('hit handler')
+        console.log('handler')
 
-        let result: ReadableStreamReadResult<Uint8Array> | undefined;
+        let result: ReadableStreamDefaultReadResult<Uint8Array> | undefined;
 
         const reader: ReadableStreamDefaultReader<Uint8Array> | undefined = req?.body?.getReader();
 
@@ -63,8 +86,8 @@ export const handler: Handlers = {
                     port: 465,
                     tls: true,
                     auth: {
-                        username: "kojinglick@gmail.com",
-                        password: "cujyqmvdonjuomru"
+                        username: config({ safe: true, export: true }).SMTPUSER,
+                        password: config({ safe: true, export: true }).SMTPPASS
                     }
                 }
             })
@@ -76,16 +99,12 @@ export const handler: Handlers = {
 
             const emailBody = generateHtml(requestBody.choices)
 
-            console.log(emailBody)
-
-
             // TODO: switch email back to dynamic from static
 
             await client.send({
-                from: "kojin - moonstripe <info@moonstripe.com>",
-                to: requestBody.email,
-                subject: "moon's the limit",
-                content: "...",
+                from: "Kojin - Moonstripe <info@moonstripe.com>",
+                to: config({ safe: true, export: true }).ENV === "dev" ? "kojinglick@gmail.com" : requestBody.email,
+                subject: "Moon's the limit",
                 html: emailBody,
             })
 

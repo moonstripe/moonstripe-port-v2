@@ -15,15 +15,15 @@ sheet.reset();
 setup({ ...config, sheet });
 
 function render(ctx: RenderContext, render: InnerRenderFunction) {
-  console.time('render function main.ts')
-  console.clear()
+  // console.time('render function main.ts')
+  // console.clear()
   const snapshot = ctx.state.get("twind") as unknown[] | null;
   sheet.reset(snapshot || undefined);
   render();
   ctx.styles.splice(0, ctx.styles.length, ...(sheet).target);
   const newSnapshot = sheet.reset();
   ctx.state.set("twind", newSnapshot);
-  console.timeEnd('render function main.ts')
+  // console.timeEnd('render function main.ts')
 }
 
 await start(manifest, { render });
