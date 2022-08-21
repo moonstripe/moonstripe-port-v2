@@ -15,7 +15,7 @@ export default () => {
                         +
                     </a>
                     {
-                        isHover ? <a href={`mailto:moonstripe@proton.me?subject=Let's Build Something Together&body=The sky's the limit!`} target="_blank" rel="noopener noreferrer" class={tw`mx-2 py-2`}>moonstripe@proton.me</a> : null
+                        isHover ? <a href={`mailto:info@moonstripe.com?subject=Let's Build Something Together&body=The sky's the limit!`} target="_blank" rel="noopener noreferrer" class={tw`mx-2 py-2`}>moonstripe@proton.me</a> : null
                     }
                 </div>
             </div>

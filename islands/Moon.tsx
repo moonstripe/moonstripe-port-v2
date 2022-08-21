@@ -15,7 +15,6 @@ export default () => {
 
     const handleResize = () => {
         if (camera && renderer) {
-            console.log('hit handler')
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
         

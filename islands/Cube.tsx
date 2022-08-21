@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h, Fragment } from "preact"
-import { useState, useLayoutEffect, useRef } from "preact/hooks"
+import { useState, useLayoutEffect, useRef, Ref } from "preact/hooks"
 import { IS_BROWSER } from "fresh/runtime.ts"
 import { tw } from "twind"
 import * as THREE from "three"
@@ -14,14 +14,13 @@ export default () => {
     const [deviceType, setDeviceType] = useState<string | undefined>()
     const [scroll, setScroll] = useState<number>(0)
     const [environment, setEnvironment] = useState<Record<string, any> | undefined>();
-    const ref = useRef<HTMLDivElement | undefined>()
-
+    const ref = useRef<HTMLDivElement>(null)
 
     const LEAVE_DISTANCE = 50;
 
     const CTL_ROTATION_SPEED = 2.5;
 
-    const handleScroll = (e) => {
+    const handleScroll = (e: any) => {
         setScroll(scroll => scroll > 2000 ? 2000 : scroll < 0 ? 0 : scroll += Math.sign(e.deltaY) * 10)
     }
 
@@ -32,8 +31,6 @@ export default () => {
             let hasTouchScreen = false;
             if ("maxTouchPoints" in navigator) {
                 hasTouchScreen = navigator.maxTouchPoints > 0;
-            } else if ("msMaxTouchPoints" in navigator) {
-                hasTouchScreen = navigator!.msMaxTouchPoints > 0;
             } else {
                 const mQ = window.matchMedia("(pointer:coarse)");
                 if (mQ && mQ.media === "(pointer:coarse)") {
@@ -42,7 +39,7 @@ export default () => {
                     hasTouchScreen = true; // deprecated, but good fallback
                 } else {
                     // Only as a last resort, fall back to user agent sniffing
-                    var UA = navigator.userAgent;
+                    const UA = navigator.userAgent;
                     hasTouchScreen =
                         /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
                         /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
@@ -84,6 +81,7 @@ export default () => {
             })
         }, [mobileTouchX])
 
+        // scrollToSection
         useLayoutEffect(() => {
             if (scroll < 500) {
                 setSection(0)
@@ -99,7 +97,7 @@ export default () => {
             }
         }, [scroll])
 
-
+        // load
         useLayoutEffect(() => {
 
             const WIDTH = ref.current?.offsetWidth;
@@ -112,7 +110,7 @@ export default () => {
             const renderer = new THREE.WebGLRenderer();
             renderer.setSize(WIDTH, HEIGHT);
 
-            ref.current.appendChild(renderer.domElement);
+            ref.current?.appendChild(renderer.domElement);
 
             const controls = new OrbitControls(camera, renderer.domElement);
             controls.enableZoom = false;
@@ -295,6 +293,7 @@ export default () => {
             return () => ref?.current?.removeChild(renderer.domElement);
         }, [deviceType])
 
+        // run
         useLayoutEffect(() => {
 
             if (environment) {
@@ -494,7 +493,7 @@ export default () => {
 
     return (
         <div>
-            <div class={tw`w-full mx-auto grid grid-cols-1 md:grid-cols-2 h-2/3 my-0 md:my-auto md:h-full pb-10 bg-white`}>
+            <div class={tw`w-full mx-auto grid grid-cols-1 md:grid-cols-2 h-2/3 my-0 md:my-auto md:h-full pb-10 bg-white rounded-lg border-hidden`}>
                 <div class={tw`col-span-1 h-full md:h-full relative`}>
                     <div ref={ref} class={tw`h-full w-full md:h-full`}></div>
                 </div>

@@ -8,7 +8,7 @@ export default () => {
         <a href={'#top'}>
             <img
                 class={tw`fixed left-10 w-1/4 lg:w-[10%]`}
-                src={"/kojin_logo_invert.svg"}
+                src={"/logo_invert.svg"}
                 alt="A moon surrounded by long clouds"
             />
         </a>

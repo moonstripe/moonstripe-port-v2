@@ -125,7 +125,7 @@ export default ({ blockNumber, pathname }: SocketClientProps) => {
     useLayoutEffect(() => {
         if (nodes && edges) {
 
-            console.log(nodes, edges)
+            // console.log(nodes, edges)
 
             const svgElement = d3.select(ref.current)
 
@@ -255,13 +255,6 @@ export default ({ blockNumber, pathname }: SocketClientProps) => {
 
     return (
         <div class={tw`text-green-400 w-full h-full`}>
-            {
-                pathname !== "/" ? (
-                    <div>
-                        <p class={tw`my-6 text-green-400`}>Crypto-Map: Ethereum</p>
-                    </div>
-                ) : null
-            }
             <p>Current Block Number: {blockNumber}</p>
             <p>Transaction Count: {edges?.length}</p>
 

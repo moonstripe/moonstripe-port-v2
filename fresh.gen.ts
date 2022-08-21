@@ -4,29 +4,33 @@
 
 import * as $0 from "./routes/[name].tsx";
 import * as $1 from "./routes/_app.tsx";
-import * as $2 from "./routes/index.tsx";
+import * as $2 from "./routes/api/index.ts";
+import * as $3 from "./routes/index.tsx";
 import * as $$0 from "./islands/Cube.tsx";
 import * as $$1 from "./islands/Data.tsx";
 import * as $$2 from "./islands/DataVisualization.tsx";
 import * as $$3 from "./islands/Foot.tsx";
-import * as $$4 from "./islands/Logo.tsx";
-import * as $$5 from "./islands/Moon.tsx";
-import * as $$6 from "./islands/ProductPages.tsx";
+import * as $$4 from "./islands/Form.tsx";
+import * as $$5 from "./islands/Logo.tsx";
+import * as $$6 from "./islands/Moon.tsx";
+import * as $$7 from "./islands/ProductPages.tsx";
 
 const manifest = {
   routes: {
     "./routes/[name].tsx": $0,
     "./routes/_app.tsx": $1,
-    "./routes/index.tsx": $2,
+    "./routes/api/index.ts": $2,
+    "./routes/index.tsx": $3,
   },
   islands: {
     "./islands/Cube.tsx": $$0,
     "./islands/Data.tsx": $$1,
     "./islands/DataVisualization.tsx": $$2,
     "./islands/Foot.tsx": $$3,
-    "./islands/Logo.tsx": $$4,
-    "./islands/Moon.tsx": $$5,
-    "./islands/ProductPages.tsx": $$6,
+    "./islands/Form.tsx": $$4,
+    "./islands/Logo.tsx": $$5,
+    "./islands/Moon.tsx": $$6,
+    "./islands/ProductPages.tsx": $$7,
   },
   baseUrl: import.meta.url,
 };

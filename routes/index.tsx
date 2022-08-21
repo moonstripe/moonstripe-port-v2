@@ -7,6 +7,7 @@ import Layout from "../components/Layout.tsx";
 import Moon from "../islands/Moon.tsx";
 import ProductPages from "../islands/ProductPages.tsx";
 import DataVisualization from "../islands/DataVisualization.tsx";
+import Form from "../islands/Form.tsx"
 
 
 export const handlers: Handlers = {
@@ -31,7 +32,7 @@ export default function Home({ url }: PageProps) {
         <div id="features" class={tw`flex flex-col w-full absolute top-[100vh]`}>
           <Fragment>
             <ProductPages />
-            <div class={tw`h-[35vh] lg:h-[25vh]`} />
+            <Form />
             <DataVisualization />
           </Fragment>
         </div>

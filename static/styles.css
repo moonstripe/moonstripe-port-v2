@@ -1,18 +1,15 @@
 html {
-    background-color: black;
+    background-color: #111122;
     font-family: 'Rubik';
-    scrollbar-color: dark;
+    scrollbar-color: light;
 }
 
 body {
     margin: 0;
-    scrollbar-color: dark;
+    scrollbar-color: light;
 }
 
-main {
-    scrollbar-color: dark;
-}
 
-div {
-    scrollbar-color: dark;
+canvas {
+    border-radius: 0.5rem;
 }
