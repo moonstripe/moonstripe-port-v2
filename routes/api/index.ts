@@ -87,10 +87,7 @@ export const handler: Handlers = {
                         password: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPPASS : Deno.env.get('SMTPPASS')
                     }
                 },
-                pool: {
-                    size: 2,
-                    timeout: 30000
-                }
+                pool: true
             })
 
             result = await reader?.read();
