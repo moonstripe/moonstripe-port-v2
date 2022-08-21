@@ -91,8 +91,8 @@ export const handler: Handlers = {
 
             result = await reader?.read();
             const requestBody = JSON.parse(decoder.decode(result?.value))
-            console.log(Deno.env.get("ENV") !== "prod" ? "kojinglick@gmail.com" : requestBody.email)
             const emailBody = generateHtml(requestBody.choices)
+            console.log(Deno.env.get("ENV") !== "prod" ? "kojinglick@gmail.com" : requestBody.email)
             await client.send({
                 from: "Kojin - Moonstripe <info@moonstripe.com>",
                 to: Deno.env.get("ENV") !== "prod" ? "kojinglick@gmail.com" : requestBody.email,
