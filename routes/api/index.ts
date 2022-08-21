@@ -3,6 +3,9 @@ import { SMTPClient } from "denomailer"
 import { config } from "dotenv"
 
 const client = new SMTPClient({
+    debug: {
+        log: true
+    },
     connection: {
         hostname: "smtp.gmail.com",
         port: 465,
