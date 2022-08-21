@@ -48,7 +48,7 @@ const generateHtml = (choices: Array<string>) => {
 export const handler: Handlers = {
     async POST(req: Request, ctx: HandlerContext) {
 
-        console.log(req.destination)
+        console.log('hit handler')
 
         let result: ReadableStreamReadResult<Uint8Array> | undefined;
 
@@ -76,10 +76,11 @@ export const handler: Handlers = {
 
             const emailBody = generateHtml(requestBody.choices)
 
-            // console.log(emailBody)
+            console.log(emailBody)
 
 
             // TODO: switch email back to dynamic from static
+
             await client.send({
                 from: "kojin - moonstripe <info@moonstripe.com>",
                 to: requestBody.email,
