@@ -11,8 +11,7 @@ const client = new SMTPClient({
             username: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPUSER : Deno.env.get('SMTPUSER'),
             password: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPPASS : Deno.env.get('SMTPPASS')
         }
-    },
-    pool: true
+    }
 })
 
 const generateHtml = (choices: Array<string>) => {
