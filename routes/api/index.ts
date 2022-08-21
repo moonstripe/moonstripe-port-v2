@@ -90,10 +90,8 @@ export const handler: Handlers = {
                 }
             })
 
-
             result = await reader?.read();
             const requestBody = JSON.parse(decoder.decode(result?.value))
-
 
             const emailBody = generateHtml(requestBody.choices)
             await client.send({
