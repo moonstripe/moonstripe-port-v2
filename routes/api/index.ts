@@ -86,6 +86,10 @@ export const handler: Handlers = {
                         username: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPUSER : Deno.env.get('SMTPUSER'),
                         password: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPPASS : Deno.env.get('SMTPPASS')
                     }
+                },
+                pool: {
+                    size: 5,
+                    timeout: 30000
                 }
             })
 
