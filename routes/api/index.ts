@@ -29,9 +29,6 @@ const generateHtml = (choices: Array<string>) => {
         custom = custom.concat(websiteHTML)
     }
 
-
-    // console.log(custom)
-
     return `
         <div style="background-color:#fff;">
             <div style="width: 33vw; margin-left: auto; margin-right: auto;">
