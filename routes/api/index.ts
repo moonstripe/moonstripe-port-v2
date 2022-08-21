@@ -2,6 +2,19 @@ import { Handlers } from "fresh/server.ts"
 import { SMTPClient } from "denomailer"
 import { config } from "dotenv"
 
+const client = new SMTPClient({
+    connection: {
+        hostname: "smtp.gmail.com",
+        port: 465,
+        tls: true,
+        auth: {
+            username: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPUSER : Deno.env.get('SMTPUSER'),
+            password: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPPASS : Deno.env.get('SMTPPASS')
+        }
+    },
+    pool: true
+})
+
 const generateHtml = (choices: Array<string>) => {
     let custom = ``;
 
@@ -77,19 +90,6 @@ export const handler: Handlers = {
         const decoder = new TextDecoder()
 
         if (!result?.done) {
-            const client = new SMTPClient({
-                connection: {
-                    hostname: "smtp.gmail.com",
-                    port: 465,
-                    tls: true,
-                    auth: {
-                        username: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPUSER : Deno.env.get('SMTPUSER'),
-                        password: Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPPASS : Deno.env.get('SMTPPASS')
-                    }
-                },
-                pool: true
-            })
-
             result = await reader?.read();
             const requestBody = JSON.parse(decoder.decode(result?.value))
             const emailBody = generateHtml(requestBody.choices)
