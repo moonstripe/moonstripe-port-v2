@@ -70,6 +70,8 @@ const generateHtml = (choices: Array<string>) => {
 
 export const handler: Handlers = {
     async POST(req: Request) {
+
+        console.log(Deno.env.get("ENV") !== "prod" ? config({ safe: true, export: true }).SMTPPASS : Deno.env.get('SMTPPASS'))
         const client = new SMTPClient({
             debug: {
                 log: true
