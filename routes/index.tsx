@@ -32,7 +32,8 @@ export default function Home({ url }: PageProps) {
         <div id="features" class={tw`flex flex-col w-full absolute top-[100vh]`}>
           <Fragment>
             <ProductPages />
-            <Form />
+            {/* <Form /> */}
+            <div class={tw`h-[35vh] lg:h-[25vh]`}/>
             <DataVisualization />
           </Fragment>
         </div>
