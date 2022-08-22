@@ -2,6 +2,7 @@ import { Handlers } from "fresh/server.ts"
 import { SMTPClient } from "denomailer"
 import { config } from "dotenv"
 
+
 const generateHtml = (choices: Array<string>) => {
     let custom = ``;
 
@@ -71,8 +72,7 @@ export const handler: Handlers = {
     async POST(req: Request) {
         const client = new SMTPClient({
             debug: {
-                log: true,
-                noStartTLS: false
+                log: true
             },
             connection: {
                 hostname: "smtp.gmail.com",
