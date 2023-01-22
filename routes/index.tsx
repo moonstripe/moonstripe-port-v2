@@ -26,7 +26,7 @@ export default function Home({ url }: PageProps) {
         <div id="splash" class={tw`z-1 flex flex-col`}>
           <div id="hero" class={tw`ml-10 flex flex-col`}>
             <h1 class={tw`text-[2.25rem] xl:text-8xl font-black`}>moonstripe</h1>
-            <i class={tw`font-extralight text-left`}>Autism as a Service.</i>
+            <i class={tw`font-extralight text-left`}>web development, out of this world.</i>
           </div>
         </div>
         <div id="features" class={tw`flex flex-col w-full absolute top-[100vh]`}>
